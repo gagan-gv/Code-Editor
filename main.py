@@ -12,7 +12,7 @@ def set_path(path):
     file_path = path
 
 def open_file():
-    path = askopenfilename(filetypes=[('Python Files', '*.py'), ('Java Files', '*.java'), ('R files', '*.r'), ('C Files', '*.c'), ('C++ Files', '*.cpp'), ('PHP Files', '*.php'), ('HTML Files', '*.html'), ('CSS Files', '*.css'), ('Javascript Files', '*.js')])
+    path = askopenfilename(filetypes=[('All Files', '*.*'), ('Python Files', '*.py'), ('Java Files', '*.java'), ('R files', '*.r'), ('C Files', '*.c'), ('C++ Files', '*.cpp'), ('PHP Files', '*.php'), ('HTML Files', '*.html'), ('CSS Files', '*.css'), ('Javascript Files', '*.js')])
     with open(path, 'r') as file:
         code = file.read()
         editor.delete('1.0', END)
@@ -21,7 +21,7 @@ def open_file():
 
 def save_as():
     if file_path == '':
-        path = asksaveasfilename(filetypes=[('Python Files', '*.py'), ('Java Files', '*.java'), ('R files', '*.r'), ('C Files', '*.c'), ('C++ Files', '*.cpp'), ('PHP Files', '*.php'), ('HTML Files', '*.html'), ('CSS Files', '*.css'), ('Javascript Files', '*.js')])
+        path = asksaveasfilename(filetypes=[('All Files', '*.*'), ('Python Files', '*.py'), ('Java Files', '*.java'), ('R files', '*.r'), ('C Files', '*.c'), ('C++ Files', '*.cpp'), ('PHP Files', '*.php'), ('HTML Files', '*.html'), ('CSS Files', '*.css'), ('Javascript Files', '*.js')])
     else:
         path = file_path
     with open(path, 'w') as file:
@@ -29,19 +29,38 @@ def save_as():
         file.write(code)
         set_path(path)
 
-def run():
-    if file_path == '':
-        messagebox.showwarning('Editor Warning', 'Please save the code')
-        return
-    
-    file_name = os.path.basename(file_path)
-    command = f'{file_name}'
+def exex(command):
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
 
     output, error = process.communicate()
 
     code_output.insert('1.0', output)
     code_output.insert('1.0', error)
+
+def run():
+    if file_path == '':
+        messagebox.showwarning('Editor Warning', 'Please save the code')
+        return
+    
+    fn, file_extension = os.path.splitext(file_path)
+    file_name = os.path.basename(file_path)
+    if file_extension == '.py':
+        command = f'py {file_name}'
+        exec(command)
+    elif file_extension == '.java':
+        command = f'javac {file_name}'
+        exec(command)
+        command = 'java {fn}'
+        exec(command)
+    elif file_extension == '.r':
+        command = f'Rscript {file_name}'
+        exec(command)
+    elif file_extension == '.c' or file_extension == '.cpp':
+        command = f'g++ {file_name}'
+        exec(command)
+    else:
+        command = 'Please use your browser'
+        exec(command)
 
 tk = Tk()
 tk.title("Codon")

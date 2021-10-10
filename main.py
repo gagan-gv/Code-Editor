@@ -29,7 +29,7 @@ def save_as():
         file.write(code)
         set_path(path)
 
-def exex(command):
+def exec(command):
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
 
     output, error = process.communicate()

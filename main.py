@@ -12,7 +12,7 @@ def set_path(path):
     file_path = path
 
 def open_file():
-    path = askopenfilename(filetypes=[('Python Files', '*.py'), ('Java Files', '*.java'), ('R files', '*.r')])
+    path = askopenfilename(filetypes=[('Python Files', '*.py'), ('Java Files', '*.java'), ('R files', '*.r'), ('C Files', '*.c'), ('C++ Files', '*.cpp'), ('PHP Files', '*.php'), ('HTML Files', '*.html'), ('CSS Files', '*.css'), ('Javascript Files', '*.js')])
     with open(path, 'r') as file:
         code = file.read()
         editor.delete('1.0', END)
@@ -21,7 +21,7 @@ def open_file():
 
 def save_as():
     if file_path == '':
-        path = asksaveasfilename(filetypes=[('Python Files', '*.py'), ('Java Files', '*.java'), ('R files', '*.r')])
+        path = asksaveasfilename(filetypes=[('Python Files', '*.py'), ('Java Files', '*.java'), ('R files', '*.r'), ('C Files', '*.c'), ('C++ Files', '*.cpp'), ('PHP Files', '*.php'), ('HTML Files', '*.html'), ('CSS Files', '*.css'), ('Javascript Files', '*.js')])
     else:
         path = file_path
     with open(path, 'w') as file:

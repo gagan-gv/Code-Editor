@@ -12,7 +12,7 @@ def set_path(path):
     file_path = path
 
 def open_file():
-    path = askopenfilename(filetypes=[('All Files', '*.*'), ('Python Files', '*.py'), ('Java Files', '*.java'), ('R files', '*.r'), ('C Files', '*.c'), ('C++ Files', '*.cpp'), ('PHP Files', '*.php'), ('HTML Files', '*.html'), ('CSS Files', '*.css'), ('Javascript Files', '*.js')])
+    path = askopenfilename(filetypes=[('All Files', '*.*'), ('Python Files', '*.py'), ('Java Files', '*.java'), ('R files', '*.r'), ('C Files', '*.c'), ('C++ Files', '*.cpp'), ('Go Files', '*.go')])
     with open(path, 'r') as file:
         code = file.read()
         editor.delete('1.0', END)
@@ -21,7 +21,7 @@ def open_file():
 
 def save_as():
     if file_path == '':
-        path = asksaveasfilename(filetypes=[('All Files', '*.*'), ('Python Files', '*.py'), ('Java Files', '*.java'), ('R files', '*.r'), ('C Files', '*.c'), ('C++ Files', '*.cpp'), ('PHP Files', '*.php'), ('HTML Files', '*.html'), ('CSS Files', '*.css'), ('Javascript Files', '*.js')])
+        path = asksaveasfilename(filetypes=[('All Files', '*.*'), ('Python Files', '*.py'), ('Java Files', '*.java'), ('R files', '*.r'), ('C Files', '*.c'), ('C++ Files', '*.cpp'), ('Go Files', '*.go')])
     else:
         path = file_path
     with open(path, 'w') as file:
@@ -58,8 +58,8 @@ def run():
     elif file_extension == '.c' or file_extension == '.cpp':
         command = f'g++ {file_name}'
         exec(command)
-    else:
-        command = 'Please use your browser'
+    elif file_extension == '.go':
+        command = f'go run {file_name}'
         exec(command)
 
 tk = Tk()

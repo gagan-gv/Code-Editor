@@ -3,7 +3,7 @@ from tkinter.filedialog import askopenfilename, asksaveasfilename
 from tkinter import messagebox
 from idlelib.percolator import Percolator
 from idlelib.colorizer import ColorDelegator
-import subprocess, os
+import subprocess, os, time
 
 file_path = ''
 
@@ -50,7 +50,7 @@ def run():
     elif file_extension == '.java':
         command = f'javac {file_name}'
         exec(command)
-        command = 'java {fn}'
+        command = f'java {fn}'
         exec(command)
     elif file_extension == '.r':
         command = f'Rscript {file_name}'

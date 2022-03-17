@@ -45,7 +45,7 @@ def run():
     fn, file_extension = os.path.splitext(file_path)
     file_name = os.path.basename(file_path)
     if file_extension == '.py':
-        command = f'py {file_name}'
+        command = f'python3 {file_name}'
         exec(command)
     elif file_extension == '.java':
         command = f'javac {file_name}'
@@ -64,7 +64,7 @@ def run():
 
 tk = Tk()
 tk.title("Codon")
-tk.iconbitmap('logo.ico')
+#tk.iconbitmap('logo.ico')
 
 menu_bar = Menu(tk)
 
